@@ -1,5 +1,7 @@
 using HistoAppV2.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +12,25 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+//builder.Services.AddControllers(config =>
+//{
+    //var policy = new AuthorizationPolicyBuilder()
+                     //.RequireAuthenticatedUser()
+                     //.Build();
+    //config.Filters.Add(new AuthorizeFilter(policy));
+//});
+
+//builder.Services.AddAuthorization(options =>
+//{
+//options.FallbackPolicy = new AuthorizationPolicyBuilder()
+//.RequireAuthenticatedUser()
+//.Build();
+//});
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

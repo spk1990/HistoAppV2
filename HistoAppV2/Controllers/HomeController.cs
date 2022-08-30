@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using HistoAppV2.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HistoAppV2.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;

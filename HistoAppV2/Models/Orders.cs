@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
+using HistoAppV2.Models;
 
 namespace HistoAppV2.Models
 {
@@ -24,12 +26,13 @@ namespace HistoAppV2.Models
         [DisplayName("Block")]
         public string? Block { get; set; }
 
-        public int? TestId { get; set; }
 
         [DisplayName("Test")]
         public string? Test { get; set; }
-
-        //public List<SelectListItem> TestList { get; set; }
+        
+        public int TestId { get; set; }
+        [NotMapped]
+        public List<SelectListItem>? TestList { get; set; }
 
         public int? LevelsId { get; set; }
 
@@ -51,8 +54,10 @@ namespace HistoAppV2.Models
         [EmailAddress]
         public string? Email { get; set; }
 
-        //public string? UserName { get; set; }
+        public string? UserName { get; set; }
 
     }
-   
+    
 }
+   
+

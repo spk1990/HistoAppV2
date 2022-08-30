@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HistoAppV2.Data;
 using HistoAppV2.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
-using MailKit.Security;
 
 namespace HistoAppV2.Controllers
 {
@@ -122,6 +117,25 @@ namespace HistoAppV2.Controllers
             }
             return View(orders);
         }
+
+        //MultiSelect List
+        public IActionResult MultiSelect()
+        {
+            var data = new List<Orders> {
+            new Orders { Id=1, Test="S100"},
+            new Orders { Id=2, Test="CD20"}
+            };
+            Orders model = new();
+            model.TestList = data.Select(x => new SelectListItem { Text = x.Test, Value = x.Id.ToString() }).ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult PostSelectedValues(PostMultiSelectList model)
+        {
+            return View();
+        }
+
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
