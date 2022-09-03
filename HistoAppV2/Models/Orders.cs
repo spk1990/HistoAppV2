@@ -11,7 +11,7 @@ using HistoAppV2.Models;
 
 namespace HistoAppV2.Models
 {
-    public class Orders
+    public class Orders 
     {
         public int Id { get; set; }
 
@@ -29,10 +29,10 @@ namespace HistoAppV2.Models
 
         [DisplayName("Test")]
         public string? Test { get; set; }
-        
-        public int TestId { get; set; }
-        [NotMapped]
-        public List<SelectListItem>? TestList { get; set; }
+
+        public int? TestId { get; set; }
+        //[NotMapped]
+        //public List<SelectListItem>? TestList { get; set; }
 
         public int? LevelsId { get; set; }
 
@@ -54,7 +54,7 @@ namespace HistoAppV2.Models
         [EmailAddress]
         public string? Email { get; set; }
 
-        public string? UserName { get; set; }
+        //public Guid CreatedBy { get; set; }
 
     }
     

@@ -22,27 +22,49 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                @if (SignInManager.IsSignedIn(User))
+                @if (Context.User.IsInRole("Administrator"))
                 {
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">All Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Create">Create Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Index">Contacts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Create">Add Roles</a>
+                            </li>
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    </div>
+                } else if(Context.User.IsInRole("User")) 
+                {
+                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                         <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">My Orders</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Create">Create Order</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacts">Contacts</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Contacts" asp-action="Index">Contacts</a>
                             </li>
+      
                         </ul>
                         <partial name="_LoginPartial" />
                     </div>
-                } else
+                }
+                else
                 {
-                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
-      
+                           
+                            
                         </ul>
                         <partial name="_LoginPartial" />
                     </div>
@@ -64,8 +86,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @*<script type="text/javascript">$(document).ready(function() {$('#MultiSelectTest').multiselect();});</script>*@
-    <script type="text/javascript">$('#MultiSelectTest').multiselect();</script>
+    @*<script type="text/javascript">$(document).ready(function() {$('#MultiSelectTest').multiselect();});</script>
+    <script type="text/javascript">$('#MultiSelectTest').multiselect();</script>*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -6,6 +6,6 @@ namespace HistoAppV2.Models
     public class HistoRoles
     {
         public int Id { get; set; }
-        public string RoleName { get; set; }
+        public string? RoleName { get; set; }
     }
 }

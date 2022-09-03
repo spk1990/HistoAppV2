@@ -1,4 +1,5 @@
 ﻿@model HistoAppV2.Models.Orders
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
 @{
@@ -32,36 +33,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Test" class="control-label"></label>
-                <div class="container">
-                    <div class="card">
-                        <div class="card-text text-center">
-                            <h1>Multi Dropdownlist example</h1>
-                        </div>
-                        <form asp-controller="Orders" asp-action="PostMultiSelectList">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <select id="MultiSelect" name="SelectedIds"
-                                                asp-items="@Model.TestList" multiple class="form-control"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="submit" value="Save" class="btn btn-primary" />
-                        </form>
-                    </div>
-                </div>
-                @*<script type="text/javascript">$(document).ready(function() {$('#MultiSelectTest').multiselect();});</script>
-                 <select id="MultiSelectTest" multiple="multiple">
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>                  
-                    <option value="3">Option 3</option>
-                    <option value="4">Option 4</option>
-                    <option value="5">Option 5</option>
-                    <option value="6">Option 6</option>
-                </select>*@
-                 @*<input asp-for="Test" class="form-control"/>
-                 <span asp-validation-for="Test" class="text-danger"></span>*@
-                 
+                 <input asp-for="Test" class="form-control"/>
+                 <span asp-validation-for="Test" class="text-danger"></span>
+                 @*<partial name="MultiSelect" />*@
             </div>
             <div class="form-group">
                 <label asp-for="Levels" class="control-label"></label>
@@ -89,7 +63,7 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add to Order" class="btn btn-primary" />
+                <input type="submit" value="Send Request" class="btn btn-primary" />
             </div>
         </form>
     </div>

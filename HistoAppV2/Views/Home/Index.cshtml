@@ -6,12 +6,12 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-@if (SignInManager.IsSignedIn(User))
+@if (Context.User.IsInRole("Administrator"))
 {
  
     <div class="text-center">
         <h1 class="display-4">Welcome to HistoApp</h1>
-        <h2>Login or Register to make an order</h2>
+        
 
     </div>
 
@@ -95,6 +95,97 @@
         </tbody>
     </table>
 }
+
+else if (SignInManager.IsSignedIn(User)){
+
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome to HistoApp</h1>
+        
+
+    </div>
+
+ 
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by Surname or Case: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+        </div>
+    
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Surname)</a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Case)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Block)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Test)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Levels)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestedBy)
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.CreatedDate)</a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+               <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Case)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Block)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Test)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Levels)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+}
+
 else
     {
         <div class="text-center">

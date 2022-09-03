@@ -132,7 +132,8 @@ namespace HistoAppV2.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, "Administrator").Wait();
+                    //Used to assign User and Administrator roles
+                    _userManager.AddToRoleAsync(user, "User").Wait(); 
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

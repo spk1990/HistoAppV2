@@ -10,6 +10,8 @@ namespace HistoAppV2.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        
+            
         private readonly ApplicationDbContext _context;
 
             public HomeController(ApplicationDbContext context)
@@ -19,7 +21,7 @@ namespace HistoAppV2.Controllers
 
 
 
-        //Search bar
+        //Search bar with Surname and Case filters
         public async Task<IActionResult> Index(string sortOrder, string searchString)
             {
                 ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";

@@ -22,27 +22,21 @@ namespace HistoAppV2.Controllers
 
         //public IActionResult MultiSelect()
         //{
-            //var data = new List<Orders> {
-            //new Orders { Id=1, Test="Cd20"},
-            //new Orders { Id=2, Test="Cd45"},
-           // new Orders { Id=3, Test="S100" }
-           // };
-           // Orders model = new();
-            //model.TestList = data.Select(x => new SelectListItem { Text = x.Test, Value = x.Id.ToString() }).ToList();
-            //return View(model);
+        //var data = new List<Orders> {
+        //new Orders { Id=1, Test="Cd20"},
+        //new Orders { Id=2, Test="Cd45"},
+        // new Orders { Id=3, Test="S100" }
+        // };
+        // Orders model = new();
+        //model.TestList = data.Select(x => new SelectListItem { Text = x.Test, Value = x.Id.ToString() }).ToList();
+        //return View(model);
         //}
 
-       
-
-        public partial class MultiSelectController : Controller
-        {
-            public IActionResult DataBinding()
-            {
-                return View();
-            }
-        }
-
         
+
+
+
+
 
         // GET: Orders
         public async Task<IActionResult> Index()
@@ -83,11 +77,11 @@ namespace HistoAppV2.Controllers
         public async Task<IActionResult> Create([Bind("Id,Surname,Case,Block,Test,Levels,RequestedBy,CreatedDate,Notes,Email")] Orders orders)
         //public IActionResult Create([Bind("Id,Surname,Case,Block,Test,Levels,RequestedBy,CreatedDate,Notes,Email")] Orders orders)
         {
-            if (!ModelState.IsValid)   //! added sends email and without it adds order to List need to fix
+            if (ModelState.IsValid)   //! added sends email and without it adds order to List need to fix
             {
                 _context.Add(orders);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
                 //return View(orders);
             }
             
@@ -101,8 +95,8 @@ namespace HistoAppV2.Controllers
 
                 var bodyBuilder = new BodyBuilder
                 {
-                    HtmlBody = $"<p>{orders.Surname}</p><p>{orders.Case}</p><p>{orders.Block}</p><p>{orders.Test}</p><p>{orders.Levels}</p><p>{orders.Notes}</p><p>{orders.RequestedBy}</p>",
-                    TextBody = "{orders.Surname} \r\n {orders.Case} \r\n {orders.Block} \r\n {orders.Test} \r\n {orders.Levels} \r\n {orders.Notes} \r\n {orders.RequestedBy}"
+                    HtmlBody = $"<p>{"Surname: "}{orders.Surname}</p><p>{"Case: "}{orders.Case}</p><p>{"Block: "}{orders.Block}</p><p>{"Test: "}{orders.Test}</p><p>{"Levels: "}{orders.Levels}</p><p>{"Notes: "}{orders.Notes}</p><p>{"Requested By: "}{orders.RequestedBy}</p>",
+                    TextBody = "{Surname}{orders.Surname} \r\n {orders.Case} \r\n {orders.Block} \r\n {orders.Test} \r\n {orders.Levels} \r\n {orders.Notes} \r\n {orders.RequestedBy}"
                 };
                 var message = new MimeMessage
                 {
@@ -115,26 +109,27 @@ namespace HistoAppV2.Controllers
 
                 client.Disconnect(true);
             }
+            ViewBag.Message = "Order sent";
             return View(orders);
         }
 
         //MultiSelect List
-        public IActionResult MultiSelect()
-        {
-            var data = new List<Orders> {
-            new Orders { Id=1, Test="S100"},
-            new Orders { Id=2, Test="CD20"}
-            };
-            Orders model = new();
-            model.TestList = data.Select(x => new SelectListItem { Text = x.Test, Value = x.Id.ToString() }).ToList();
-            return View(model);
-        }
+        //public IActionResult MultiSelect()
+        //{
+            //var data = new List<Orders> {
+            //new Orders { Id=1, Test="S100"},
+           // new Orders { Id=2, Test="CD20"}
+            //};
+            //Orders model = new();
+            //model.TestList = data.Select(x => new SelectListItem { Text = x.Test, Value = x.Id.ToString() }).ToList();
+            //return View(model);
+        //}
 
-        [HttpPost]
-        public IActionResult PostSelectedValues(PostMultiSelectList model)
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult PostSelectedValues(PostMultiSelectList model)
+        //{
+            //return View();
+        //}
 
 
         // GET: Orders/Edit/5

@@ -13,16 +13,17 @@ namespace HistoAppV2.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+            //base.OnModelCreating(builder);
 
             //builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
-        }
+        //}
         public DbSet<HistoAppV2.Models.Orders>? Orders { get; set; }
         public DbSet<HistoAppV2.Models.HistoRoles>? HistoRoles { get; set; }
+        public DbSet<HistoAppV2.Models.Contacts>? Contacts { get; set; }
 
-        
+        //public DbSet<HistoAppV2.Models.MultiSelectList>? MultiList { get; set; }
     }
 }
 
