@@ -65,6 +65,8 @@
             <div class="form-group">
                 <input type="submit" value="Send Request" class="btn btn-primary" />
             </div>
+            @TempData["Message"]
+            
         </form>
     </div>
 </div>
@@ -72,8 +74,10 @@
     <a asp-action="Index">View Order</a>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Create">Clear form</a>
 </div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

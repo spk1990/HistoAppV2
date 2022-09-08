@@ -5,6 +5,7 @@ using HistoAppV2.Data;
 using HistoAppV2.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
+using Microsoft.AspNetCore.Identity;
 
 namespace HistoAppV2.Controllers
 {
@@ -32,8 +33,6 @@ namespace HistoAppV2.Controllers
         //return View(model);
         //}
 
-        
-
 
 
 
@@ -41,21 +40,28 @@ namespace HistoAppV2.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-              return _context.Orders != null ? 
+            
+            return _context.Orders != null ? 
                           View(await _context.Orders.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Orders'  is null.");
         }
 
+        
+        //public IList<Orders> MyOrders(string id)
+        //{
+        //    return _context.Orders.Where(o => o.AspNetUsers.IdOrder = id).ToList();
+        //}
+
         // GET: Orders/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? idOrder)
         {
-            if (id == null || _context.Orders == null)
+            if (idOrder == null || _context.Orders == null)
             {
                 return NotFound();
             }
 
             var orders = await _context.Orders
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdOrder == idOrder);
             if (orders == null)
             {
                 return NotFound();
@@ -77,15 +83,17 @@ namespace HistoAppV2.Controllers
         public async Task<IActionResult> Create([Bind("Id,Surname,Case,Block,Test,Levels,RequestedBy,CreatedDate,Notes,Email")] Orders orders)
         //public IActionResult Create([Bind("Id,Surname,Case,Block,Test,Levels,RequestedBy,CreatedDate,Notes,Email")] Orders orders)
         {
-            if (ModelState.IsValid)   //! added sends email and without it adds order to List need to fix
+            if (ModelState.IsValid)   
             {
                 _context.Add(orders);
                 await _context.SaveChangesAsync();
+                TempData["Message"] = "Request complete";
                 //return RedirectToAction("Index");
                 //return View(orders);
+                
             }
             
-            //sending email
+            //sending email using Gmail SMTP
 
             using (var client = new SmtpClient())
             {
@@ -96,7 +104,6 @@ namespace HistoAppV2.Controllers
                 var bodyBuilder = new BodyBuilder
                 {
                     HtmlBody = $"<p>{"Surname: "}{orders.Surname}</p><p>{"Case: "}{orders.Case}</p><p>{"Block: "}{orders.Block}</p><p>{"Test: "}{orders.Test}</p><p>{"Levels: "}{orders.Levels}</p><p>{"Notes: "}{orders.Notes}</p><p>{"Requested By: "}{orders.RequestedBy}</p>",
-                    TextBody = "{Surname}{orders.Surname} \r\n {orders.Case} \r\n {orders.Block} \r\n {orders.Test} \r\n {orders.Levels} \r\n {orders.Notes} \r\n {orders.RequestedBy}"
                 };
                 var message = new MimeMessage
                 {
@@ -109,7 +116,7 @@ namespace HistoAppV2.Controllers
 
                 client.Disconnect(true);
             }
-            ViewBag.Message = "Order sent";
+           
             return View(orders);
         }
 
@@ -153,9 +160,9 @@ namespace HistoAppV2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Surname,Case,Block,Test,Levels,RequestedBy,CreatedDate,Notes,Email")] Orders orders)
+        public async Task<IActionResult> Edit(int idOrder, [Bind("IdOrder,Surname,Case,Block,Test,Levels,RequestedBy,CreatedDate,Notes,Email")] Orders orders)
         {
-            if (id != orders.Id)
+            if (idOrder != orders.IdOrder)
             {
                 return NotFound();
             }
@@ -169,7 +176,7 @@ namespace HistoAppV2.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrdersExists(orders.Id))
+                    if (!OrdersExists(orders.IdOrder))
                     {
                         return NotFound();
                     }
@@ -184,15 +191,15 @@ namespace HistoAppV2.Controllers
         }
 
         // GET: Orders/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? idOrder)
         {
-            if (id == null || _context.Orders == null)
+            if (idOrder == null || _context.Orders == null)
             {
                 return NotFound();
             }
 
             var orders = await _context.Orders
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdOrder == idOrder);
             if (orders == null)
             {
                 return NotFound();
@@ -220,9 +227,9 @@ namespace HistoAppV2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrdersExists(int id)
+        private bool OrdersExists(int idOrder)
         {
-          return (_context.Orders?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Orders?.Any(e => e.IdOrder == idOrder)).GetValueOrDefault();
         }
     }
 }

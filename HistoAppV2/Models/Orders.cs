@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using HistoAppV2.Models;
 
-namespace HistoAppV2.Models
+namespace HistoAppV2.Models 
 {
-    public class Orders 
+    public class Orders : IdentityUser
     {
-        public int Id { get; set; }
+        public int IdOrder { get; set; }
 
         [Required]
         [DisplayName("Surname")]
@@ -52,9 +52,10 @@ namespace HistoAppV2.Models
         
         [DisplayName("Email")]
         [EmailAddress]
-        public string? Email { get; set; }
+        public string? EmailSent { get; set; }
+        //public object AspNetUsers { get; internal set; }
 
-        //public Guid CreatedBy { get; set; }
+        //public string? UserName { get; }
 
     }
     

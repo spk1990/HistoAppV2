@@ -1,18 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
 html {
-  font-size: 14px;
+    font-size: 14px;
+    font-family: 'Facebook Letter Faces'
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+        color: #000000;
+        font-family: 'Facebook Letter Faces'
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    
+    font-family: 'Facebook Letter Faces'
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    color: #fff;
+    background-color: #77C9D4;
+    font-family: 'Facebook Letter Faces'
 }
+
+.navbar-brand {
+    float: left;
+    padding: 15px 15px;
+    font-size: 40px;
+    line-height: 20px;
+    background-color: #fff;
+    font-family: 'Facebook Letter Faces'
+}
+
+.form-floating{
+    color: #000000;
+}
+
+.navbar{
+    color: #343a40;
+}
+
+.table{
+    color: #fff;
+    
+}
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+tr:hover {
+    background-color: #57BC90;
+}
+
+.SearchButton:hover {
+    
+    color: white;
+}
+
+.form-actions no-color {
+    color: #57BC90;
+}
+
+.SearchButton {
+    background-color: #57BC90; 
+    border: none;
+    color: #343a40;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+nav {
+    text-align: center;
+    font-size: 1rem;
+    border-bottom: 1px solid hsla(0,0%,100%,0.1);
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 13px 13px;
+    color: #fff;
+    margin-right: 5px;
+}
+
+    .nav-link:hover {
+        text-decoration: none;
+        color: #57BC90;
+        background-color: #57BC90;
+        border-bottom: 2px solid #c3fae8;
+    }
+
+    .nav-link.current {
+        border-bottom: 2px solid #38d9a9;
+    }
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+    .nav {
+        font-size: 1.1rem;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav-link {
+        padding: 20px 20px;
+    }
+}
+
+
