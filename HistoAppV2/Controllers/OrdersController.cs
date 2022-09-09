@@ -33,20 +33,28 @@ namespace HistoAppV2.Controllers
         //return View(model);
         //}
 
-
-
-
-
-        // GET: Orders
-        public async Task<IActionResult> Index()
+        public IList<Orders> Index(string Id)
         {
-            
-            return _context.Orders != null ? 
-                          View(await _context.Orders.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Orders'  is null.");
+            return _context.Orders.Where(o => o.Id == Id).ToList();
+                        
+
         }
 
-        
+
+
+
+        //GET: Orders
+        public async Task<IActionResult> Index()
+        {
+
+            return _context.Orders != null ?
+                          View(await _context.Orders.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.Orders'  is null.");
+
+        }
+
+
+
         //public IList<Orders> MyOrders(string id)
         //{
         //    return _context.Orders.Where(o => o.AspNetUsers.IdOrder = id).ToList();

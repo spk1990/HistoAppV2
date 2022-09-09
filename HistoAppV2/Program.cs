@@ -17,21 +17,6 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddControllers(config =>
-//{
-    //var policy = new AuthorizationPolicyBuilder()
-                     //.RequireAuthenticatedUser()
-                     //.Build();
-    //config.Filters.Add(new AuthorizeFilter(policy));
-//});
-
-//builder.Services.AddAuthorization(options =>
-//{
-//options.FallbackPolicy = new AuthorizationPolicyBuilder()
-//.RequireAuthenticatedUser()
-//.Build();
-//});
-
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings.

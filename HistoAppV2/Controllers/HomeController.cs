@@ -20,8 +20,7 @@ namespace HistoAppV2.Controllers
                 _context = context;
             }
 
-
-
+        
         //Search bar with Surname and Case filters
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
@@ -53,10 +52,7 @@ namespace HistoAppV2.Controllers
             return View(await orders.AsNoTracking().ToListAsync());
         }
 
-        //private bool OrdersExists(int idOrder)
-        //{
-        //    return _context.IdOrder.Any(e => e.IdOrder == idOrder);
-        //}
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
