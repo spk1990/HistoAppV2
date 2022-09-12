@@ -33,12 +33,12 @@ namespace HistoAppV2.Controllers
         //return View(model);
         //}
 
-        public IList<Orders> Index(string Id)
-        {
-            return _context.Orders.Where(o => o.Id == Id).ToList();
-                        
+        //public IList<Orders> Index(string Id)
+        //{
+        //    return _context.Orders.Where(o => o.Id == Id).ToList();
 
-        }
+
+        //}
 
 
 
@@ -61,15 +61,15 @@ namespace HistoAppV2.Controllers
         //}
 
         // GET: Orders/Details/5
-        public async Task<IActionResult> Details(int? idOrder)
+        public async Task<IActionResult> Details(int? id)
         {
-            if (idOrder == null || _context.Orders == null)
+            if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
 
             var orders = await _context.Orders
-                .FirstOrDefaultAsync(m => m.IdOrder == idOrder);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (orders == null)
             {
                 return NotFound();
@@ -168,9 +168,9 @@ namespace HistoAppV2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int idOrder, [Bind("IdOrder,Surname,Case,Block,Test,Levels,RequestedBy,CreatedDate,Notes,Email")] Orders orders)
+        public async Task<IActionResult> Edit(int id, [Bind("IdOrder,Surname,Case,Block,Test,Levels,RequestedBy,CreatedDate,Notes,Email")] Orders orders)
         {
-            if (idOrder != orders.IdOrder)
+            if (id != orders.Id)
             {
                 return NotFound();
             }
@@ -184,7 +184,7 @@ namespace HistoAppV2.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrdersExists(orders.IdOrder))
+                    if (!OrdersExists(orders.Id))
                     {
                         return NotFound();
                     }
@@ -199,15 +199,15 @@ namespace HistoAppV2.Controllers
         }
 
         // GET: Orders/Delete/5
-        public async Task<IActionResult> Delete(int? idOrder)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (idOrder == null || _context.Orders == null)
+            if (id == null || _context.Orders == null)
             {
                 return NotFound();
             }
 
             var orders = await _context.Orders
-                .FirstOrDefaultAsync(m => m.IdOrder == idOrder);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (orders == null)
             {
                 return NotFound();
@@ -235,9 +235,9 @@ namespace HistoAppV2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrdersExists(int idOrder)
+        private bool OrdersExists(int id)
         {
-          return (_context.Orders?.Any(e => e.IdOrder == idOrder)).GetValueOrDefault();
+          return (_context.Orders?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

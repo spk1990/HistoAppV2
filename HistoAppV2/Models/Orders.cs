@@ -11,9 +11,9 @@ using HistoAppV2.Models;
 
 namespace HistoAppV2.Models 
 {
-    public class Orders : IdentityUser
+    public class Orders 
     {
-        public int IdOrder { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DisplayName("Surname")]
@@ -52,7 +52,7 @@ namespace HistoAppV2.Models
         
         [DisplayName("Email")]
         [EmailAddress]
-        public string? EmailSent { get; set; }
+        public string? Email { get; set; }
         //public object AspNetUsers { get; internal set; }
 
         //public string? UserName { get; }
